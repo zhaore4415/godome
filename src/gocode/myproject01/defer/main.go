@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func main() {
 	add(20, 30)
 }
