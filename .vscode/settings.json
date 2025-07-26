@@ -1,3 +1,18 @@
 {
-    "go.toolsEnvVars": {}
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on",
+    "GOPROXY": "https://goproxy.cn,direct",
+    "GOSUMDB": "sum.golang.org",
+    "CGO_ENABLED": "0"  // 除非需要CGO
+  },
+  "go.useLanguageServer": true,
+  "gopls": {
+    "build.experimentalWorkspaceModule": true,
+    "ui.documentation.hoverKind": "NoDocumentation",
+    "staticcheck": false
+  },
+   "extensions.ignoreRecommendations": true,
+
+  "go.languageServerFlags": ["-remote=auto"]
+  
 }
