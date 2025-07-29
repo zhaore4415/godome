@@ -1,0 +1,22 @@
+{
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on",
+    "GOPROXY": "https://goproxy.cn,direct",
+    "GOSUMDB": "sum.golang.org",
+    "CGO_ENABLED": "0"  // 除非需要CGO
+  },
+  "go.useLanguageServer": true,
+  "gopls": {
+    "build.experimentalWorkspaceModule": true,
+    "ui.documentation.hoverKind": "NoDocumentation",
+    "staticcheck": false,
+    // "ui.inlayhint.disable": true  ,       // 禁用gopls的提示
+    //  "ui.completion.usePlaceholders": false,  // 禁用补全占位符
+    // "deepCompletion": false  // 关闭深度补全
+  },
+   "extensions.ignoreRecommendations": true,
+
+  "go.languageServerFlags": ["-remote=auto"],
+ 
+  
+}
