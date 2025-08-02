@@ -3,7 +3,8 @@
     "GO111MODULE": "on",
     "GOPROXY": "https://goproxy.cn,direct",
     "GOSUMDB": "sum.golang.org",
-    "CGO_ENABLED": "0"  // 除非需要CGO
+    "CGO_ENABLED": "0",
+    "GOTOOLCHAIN": "auto"
   },
   "go.useLanguageServer": true,
   "gopls": {
