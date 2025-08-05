@@ -8,7 +8,7 @@
   },
   "go.useLanguageServer": true,
   "gopls": {
-    "build.experimentalWorkspaceModule": true,
+   
     "ui.documentation.hoverKind": "NoDocumentation",
     "staticcheck": false,
     // "ui.inlayhint.disable": true  ,       // 禁用gopls的提示
