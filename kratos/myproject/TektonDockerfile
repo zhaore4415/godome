@@ -1,0 +1,34 @@
+FROM harbor.test.shijizhongyun.com/devops/golang:1.24.0 AS builder
+COPY . /src
+WORKDIR /src
+
+#ssh证书配置
+RUN mv ssh/ ~/.ssh/
+RUN chmod 600 /root/.ssh/id_rsa
+
+#配置私有仓库
+RUN git config --global url."SYSTEM@git.shijizhongyun.com:".insteadOf "https://git.shijizhongyun.com/"
+RUN git config --list
+#RUN export GOPRIVATE=git.shijizhongyun.com/*
+ENV GOPRIVATE=git.shijizhongyun.com/*
+ENV GOPROXY=https://goproxy.cn
+RUN go env
+RUN go mod tidy
+RUN make build-devops
+
+
+FROM harbor.test.shijizhongyun.com/devops/debian:stable-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		ca-certificates  \
+        netbase \
+        && rm -rf /var/lib/apt/lists/ \
+        && apt-get autoremove -y && apt-get autoclean -y
+
+WORKDIR /app
+COPY --from=builder /src/bin /app
+COPY --from=builder /src/devops.sh /app
+RUN chmod +x /app/devops.sh
+
+EXPOSE 8100
+EXPOSE 9100
+CMD ["./devops.sh"]

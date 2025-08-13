@@ -1,0 +1,20 @@
+[
+   {
+      "Anonymous": true,
+      "Endpoint": "/hello.Greeter/SayHello"
+   },
+   {
+      "Anonymous": true,
+      "Endpoint": "/hello.Greeter/TestLink"
+   },
+   {
+      "Name": "用户.管理.查询列表",
+      "Desc": "查询用户列表",
+      "Endpoint": "/hello.User/FindList"
+   },
+   {
+      "Name": "用户.管理.更新",
+      "Desc": "更新用户信息",
+      "Endpoint": "/hello.User/Update"
+   }
+]
