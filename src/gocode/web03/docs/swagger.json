@@ -1,0 +1,169 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server for a Todo List API.",
+        "title": "Sample API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8082",
+    "basePath": "/api/v1",
+    "paths": {
+        "/todos": {
+            "get": {
+                "description": "获取所有待办事项的列表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "todos"
+                ],
+                "summary": "获取所有待办事项",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Todo"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "创建一个新的待办事项",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "todos"
+                ],
+                "summary": "创建一个新的 Todo 项目",
+                "parameters": [
+                    {
+                        "description": "Todo 项目（无需传 ID）",
+                        "name": "todo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Todo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Todo"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/todos/{id}": {
+            "get": {
+                "description": "根据提供的 ID 获取一个具体的待办事项",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "todos"
+                ],
+                "summary": "根据 ID 获取单个待办事项",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "待办事项 ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Todo"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.ErrorResponse": {
+            "description": "通用错误响应",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "Something went wrong"
+                }
+            }
+        },
+        "models.Todo": {
+            "description": "Todo 项目模型",
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "done": {
+                    "description": "Whether the todo is completed",
+                    "type": "boolean",
+                    "example": false
+                },
+                "id": {
+                    "description": "ID of the todo item\nin: path\nrequired: true\nexample: 1",
+                    "type": "integer",
+                    "example": 1
+                },
+                "title": {
+                    "description": "Title of the todo\nrequired: true\nmin length: 1\nmax length: 50",
+                    "type": "string",
+                    "example": "Learn Go"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
